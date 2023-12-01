@@ -1,4 +1,71 @@
 footer {
     background-color: #E2BFBF;
-    width:100%
+    width:100%;
+    display:flex;
+    justify-content: space-around;
+    gap : 1rem;
+    padding : 5rem 0rem;
+}
+
+footer h3{
+    font-family: Acumin Pro;
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-decoration: underline;
+    margin-bottom : 2rem;
+
+}
+
+footer div:nth-child(1) {
+    width:20%;
+    justify-content: center;
+}
+
+footer div:nth-child(2) {
+    width:60%;
+    justify-content: center;
+    text-align: center;
+}
+
+footer ul {
+    padding-left:1rem
+}
+
+footer li {
+    font-family: Acumin Pro;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 275;
+    line-height: normal;
+    padding-left:1.6rem;
+}
+
+footer form {
+    width: 80%;
+    /* height: 3rem; */
+    background-color: white;
+    border-radius: 3rem;
+    display: flex;
+    gap: 3rem;
+    /* width: 49.375rem; */
+    height: 6.125rem;
+    align-items: center;
+}
+
+footer input {
+    width:70%;
+    padding-left : 3rem;
+    border: none;
+    background-color: unset;
+}
+
+footer button{
+    width: 15.25rem;
+    height: 5.125rem;
+    border-radius: 3rem;
+    margin-right: 0.5rem;
+    background-color: #E2BFBF;
+    border : none;
 }
