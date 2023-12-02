@@ -12,9 +12,10 @@ class AlbumController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($order="titre", $by="asc")
     {
-        $albums = Album::all();
+        $albums = Album::orderBy($order,$by)->get();
+        
         return view('pages.album.index', ["albums" => $albums]);
     }
 
@@ -123,5 +124,14 @@ class AlbumController extends Controller
         }
         $album->delete();
         return redirect(route("albumIndex"));
+    }
+
+    public function filter(Request $request){
+
+        if($request->has("search")){
+            $albums = Album::where('titre', 'like', "%".$request->input('search')."%")->get();
+        }
+
+        return view("pages.album.index", ["albums" => $albums]);
     }
 }
