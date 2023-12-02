@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="/index.js"></script>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <title>Album Photo</title>
 </head>
 <body>
@@ -28,6 +29,22 @@
     <main>
     @yield('content')
     </main>
-    <footer></footer>
+    <footer>
+        <div id="information">
+            <h3>Informations</h3>
+            <ul>
+                <li>Contact</li>
+                <li>Mentions Légales</li>
+                <li>Réseaux sociaux</li>
+            </ul>
+        </div>
+        <div id="newsletter">
+            <h3>News letter</h3>
+            <form action="" method="" class="news-letter">
+                <input type="text" name="mail-news" id="mail-news" placeholder="Adresse Mail">
+                <button>Envoyer</button>
+            </form>
+        </div>
+    </footer>
 </body>
 </html>
