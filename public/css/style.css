@@ -27,3 +27,87 @@
     margin:0;
     padding: 0;
 }
+/* acceuil */
+
+
+.container{
+    display: flex;
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    justify-content: space-between;
+  
+  
+    
+}
+
+.containertxt{
+   
+    background-color: #E2BFBF;
+    width: 48%;
+text-align: center;
+border-radius: 20px;
+
+    
+    
+}
+.containertxt p {
+font-size: 32px;
+margin-top: 15%;
+color: black;
+text-align: center;
+margin-bottom: 75px;
+
+}
+
+
+.containertxt a {
+
+ color: black;
+ font-size: 32px;
+ text-decoration: none;
+ background-color: white;
+ padding: 0.5em;
+ padding-left: 2em;
+ padding-right: 2em;
+ border-radius: 50px;
+
+
+}
+
+
+.police{
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+}
+
+
+    .imageback{
+        width: 48%;
+        position: relative;
+    }
+
+    .imageback img{
+        width: 100%;
+    }
+.imageback a {
+padding: 0.5em;
+padding-left: 1em;
+padding-right: 1em;
+font-size: 32px;
+background-color: #E2BFBF;
+color: black;
+border-radius: 50px;
+text-decoration: none;
+}
+
+.absl {
+    position: absolute;
+    top: 60%;
+    left: 25%;
+
+}
+/* endacceuil */

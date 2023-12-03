@@ -7,6 +7,8 @@
     <script src="/index.js"></script>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="https://use.typekit.net/kjw8qrv.css">
     <title>Album Photo</title>
 </head>
 <body>
@@ -26,6 +28,16 @@
             <a href="{{route("register")}}">Register</a>
         @endauth
     </nav>
+    <header>
+        <nav class="navigation">
+            <a href="">album</a>
+            <a href="">tag</a>
+            <a href="">connexion</a>
+        </nav>
+        <div class="buthead">
+            <a href="">CREE TON ALBUM<br>AVEC ARTLENS</a>
+        </div>
+    </header>
     <main>
     @yield('content')
     </main>
