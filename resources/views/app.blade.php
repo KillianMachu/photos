@@ -30,12 +30,21 @@
     </nav>
     <header>
         <nav class="navigation">
-            <a href="">album</a>
-            <a href="">tag</a>
-            <a href="">connexion</a>
+            <a href="{{route("albumIndex")}}">album</a>
+            <a href="{{route("tagIndex")}}">tag</a>
+             @auth
+            <h3>Bonjour {{Auth::user()->name}}</h3>
+            <a href="{{route("logout")}}"
+            onclick="document.getElementById('logout').submit(); return false;">Logout</a>
+            <form id="logout" action="{{route("logout")}}" method="post">
+                @csrf
+            </form>
+        @else
+            <a href="{{route("login")}}">connexion</a>
+            @endauth
         </nav>
         <div class="buthead">
-            <a href="">CREE TON ALBUM<br>AVEC ARTLENS</a>
+            <h1>ARTLENS TON ALBUM <br>PARTOUT AVEC TOI</h1>
         </div>
     </header>
     <main>
