@@ -34,7 +34,7 @@ class PhotoController extends Controller
             "titre-photo.*" => "required",
             // "url.*" => "required | url",
             "image.*" => "required | file | mimes:jpg,png",
-            "note.*" => "required | integer | max:10",
+            "note.*" => "required | integer | max:5",
             "tags.*" => "required",
         ]);
 

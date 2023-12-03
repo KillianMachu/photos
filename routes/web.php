@@ -33,7 +33,7 @@ Route::resource('/album', AlbumController::class, ['names'=>["show"=>"albumShow"
 
 Route::resource('/album/{order?}/{by?}', AlbumController::class, ['names'=>["index"=>"albumIndex"]])->only(["index"]);
 
-Route::post('/album/filter', [AlbumController::class, 'filter'])->name('albumFilter');
+Route::get('/album/filter', [AlbumController::class, 'filter'])->name('albumFilter');
 
 Route::resource('/tag', TagController::class, ['names'=>["index"=>"tagIndex", "show"=>"tagShow"]])->only(["index", "show"]);
 

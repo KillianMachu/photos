@@ -45,7 +45,7 @@
                     <input type="text" name="titre-photo[]" required placeholder="Titre">
                     <input type="file" name="image[]" required>
                     {{-- <input type="text" name="url[]" required placeholder="Lien de l'image"> --}}
-                    <input type="number" name="note[]" required placeholder="Note">
+                    <input type="number" name="note[]" min="0" max="10" required placeholder="Note">
                     <input type="text" name="tags[]" required placeholder="Les tags">
                     <button id="remove-photo">Supprimer la photo</button>
                 </div>

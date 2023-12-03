@@ -2,8 +2,7 @@
 
 @section('content')
     <h1>Voici la liste des albums</h1>
-    <form action="{{route("albumFilter")}}" method="POST">
-        @csrf
+    <form action="{{route("albumFilter")}}" method="GET">
         <input type="search" name="search" id="search">
         <input type="submit" value="Rechercher">
     </form>

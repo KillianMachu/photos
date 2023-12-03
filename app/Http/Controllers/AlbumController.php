@@ -37,7 +37,7 @@ class AlbumController extends Controller
             "titre-photo.*" => "required",
             "image.*" => "required | file | mimes:jpg,png",
             // "url.*" => "required | url",
-            "note.*" => "required | integer | max:10",
+            "note.*" => "required | integer | max:5",
             "tags.*" => "required",
         ]);
 
