@@ -22,14 +22,18 @@ Route::get('/', function () {
 })->name('home');
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::resource('/album', AlbumController::class, ['names'=>["index"=>"albumIndex", "show"=>"albumShow", "create"=>"albumCreate", "store"=>"albumStore", "destroy"=>"albumDestroy"]])->only(["create", "store", "destroy"]);
+    Route::resource('/album', AlbumController::class, ['names'=>["create"=>"albumCreate", "store"=>"albumStore", "destroy"=>"albumDestroy"]])->only(["create", "store", "destroy"]);
 });
 
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('/photo', PhotoController::class, ['names'=>["store"=>"photoStore", "destroy"=>"photoDestroy"]])->only(["store", "destroy"]);
 });
 
-Route::resource('/album', AlbumController::class, ['names'=>["index"=>"albumIndex", "show"=>"albumShow", "create"=>"albumCreate", "store"=>"albumStore", "destroy"=>"albumDestroy"]])->only(["index", "show"]);
+Route::resource('/album', AlbumController::class, ['names'=>["show"=>"albumShow"]])->only(["show"]);
+
+Route::resource('/album/{order?}/{by?}', AlbumController::class, ['names'=>["index"=>"albumIndex"]])->only(["index"]);
+
+Route::post('/album/filter', [AlbumController::class, 'filter'])->name('albumFilter');
 
 Route::resource('/tag', TagController::class, ['names'=>["index"=>"tagIndex", "show"=>"tagShow"]])->only(["index", "show"]);
 
