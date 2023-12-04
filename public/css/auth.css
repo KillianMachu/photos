@@ -1,0 +1,36 @@
+#auth {
+    background-color: #E2BFBF;
+    padding: 2rem;
+
+}
+
+.auth2{
+    background-color: white;
+    border-radius: 20px;
+    padding: 2rem;
+    width:60%;
+    margin:auto;
+    display: flex;
+    justify-content: space-around;
+    gap:1rem;
+
+}
+
+.auth2 div:nth-child(1){
+    width: 50%;
+    padding: 0 2rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.auth2 div:nth-child(2){
+    width: 50%;
+    justify-content: center;
+    padding: 0 2rem;
+}
+
+#auth p {
+    font-family: "acumin-pro", sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+}
