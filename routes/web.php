@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+Route::get('/album/filter', [AlbumController::class, 'filter'])->name('albumFilter');
+Route::get('/album/filterPhoto/{id}', [AlbumController::class, 'filterPhotos'])->name('albumFilterPhoto');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('/album', AlbumController::class, ['names'=>["create"=>"albumCreate", "store"=>"albumStore", "destroy"=>"albumDestroy"]])->only(["create", "store", "destroy"]);
@@ -29,11 +31,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/photo', PhotoController::class, ['names'=>["store"=>"photoStore", "destroy"=>"photoDestroy"]])->only(["store", "destroy"]);
 });
 
-Route::resource('/album', AlbumController::class, ['names'=>["show"=>"albumShow"]])->only(["show"]);
+Route::resource('/album', AlbumController::class, ['names'=>["show"=>"albumShow", "index"=>"albumIndex"]])->only(["show", "index"]);
 
-Route::resource('/album/{order?}/{by?}', AlbumController::class, ['names'=>["index"=>"albumIndex"]])->only(["index"]);
 
-Route::get('/album/filter', [AlbumController::class, 'filter'])->name('albumFilter');
 
 Route::resource('/tag', TagController::class, ['names'=>["index"=>"tagIndex", "show"=>"tagShow"]])->only(["index", "show"]);
 

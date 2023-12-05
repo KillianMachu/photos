@@ -12,10 +12,14 @@ class AlbumController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($order="titre", $by="asc")
+    public function index(Request $request)
     {
+
+        $order = $request->input("order")?? "titre";
+        $by = $request->input("by") ?? "asc";
+
         $albums = Album::orderBy($order,$by)->get();
-        
+
         return view('pages.album.index', ["albums" => $albums]);
     }
 
@@ -127,11 +131,31 @@ class AlbumController extends Controller
     }
 
     public function filter(Request $request){
-
         if($request->has("search")){
             $albums = Album::where('titre', 'like', "%".$request->input('search')."%")->get();
         }
 
         return view("pages.album.index", ["albums" => $albums]);
+    }
+
+    public function filterPhotos(Request $request, $id){
+        $tag = $request->input('tag');
+        $titre = $request->input('titre');
+        $album = Album::findOrFail($id);
+        $query = Photo::query();
+
+        if($tag){
+            $query->whereHas('tags', function ($query) use ($tag){
+                $query->where('nom', $tag);
+            })->where("album_id", $id);
+        }
+
+        if($titre){
+            $query->where('titre', 'LIKE', "%".$titre."%");
+        }
+
+        $photoFilter = $query->get();
+
+        return view('pages.album.show', compact('photoFilter','album'));
     }
 }

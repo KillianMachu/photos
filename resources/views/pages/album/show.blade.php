@@ -2,6 +2,11 @@
 
 @section('content')
     <h1>{{$album->titre}}</h1>
+    <form action="{{route("albumFilterPhoto", "$album->id")}}" method="GET">
+        <input type="text" name="titre" id="titre">
+        <input type="text" name="tag" id="tag">
+        <input type="submit">
+    </form>
     @if (isset(Auth::user()->id) && Auth::user()->id == $album->user_id)
         <form action="{{route("albumDestroy", $album->id)}}" method="post">
             @csrf
@@ -10,7 +15,8 @@
         </form>
     @endif
     <ul>
-        @foreach ($album->photos as $p)
+
+        @forelse ($photoFilter ? $photo=$photoFilter : $photo=$album->photos as $p)
             <li>
                 <div id="photoBig">
                     <div>
@@ -34,7 +40,9 @@
                     </form>
                 @endif
             </li>
-        @endforeach
+        @empty
+            <p>Aucune photo trouvée</p>
+        @endforelse
     </ul>
         @if (isset(Auth::user()->id) && Auth::user()->id == $album->user_id)
         <form action="/photo" method="POST" id="add" enctype="multipart/form-data">
