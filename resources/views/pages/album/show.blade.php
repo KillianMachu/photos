@@ -5,6 +5,14 @@
     <form action="{{route("albumFilterPhoto", "$album->id")}}" method="GET">
         <input type="text" name="titre" id="titre">
         <input type="text" name="tag" id="tag">
+        <select name="order" id="order">
+            <option value="titre">Titre</option>
+            <option value="note">Note</option>
+        </select>
+        <select name="by" id="by" >
+            <option value="asc">Croissant</option>
+            <option value="desc">Décroissant</option>
+        </select>
         <input type="submit">
     </form>
     @if (isset(Auth::user()->id) && Auth::user()->id == $album->user_id)
@@ -16,7 +24,7 @@
     @endif
     <ul>
 
-        @forelse ($photoFilter ? $photo=$photoFilter : $photo=$album->photos as $p)
+        @forelse (isset($photoFilter) && $photoFilter ? $photo=$photoFilter : $photo=$album->photos as $p)
             <li>
                 <div id="photoBig">
                     <div>

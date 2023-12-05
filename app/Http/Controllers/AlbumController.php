@@ -130,7 +130,7 @@ class AlbumController extends Controller
         return redirect(route("albumIndex"));
     }
 
-    public function filter(Request $request){
+    public function sort(Request $request){
         if($request->has("search")){
             $albums = Album::where('titre', 'like', "%".$request->input('search')."%")->get();
         }
@@ -139,6 +139,9 @@ class AlbumController extends Controller
     }
 
     public function filterPhotos(Request $request, $id){
+        $order = $request->input("order")?? "titre";
+        $by = $request->input("by") ?? "asc";
+
         $tag = $request->input('tag');
         $titre = $request->input('titre');
         $album = Album::findOrFail($id);
@@ -151,10 +154,14 @@ class AlbumController extends Controller
         }
 
         if($titre){
-            $query->where('titre', 'LIKE', "%".$titre."%");
+            $query->where('titre', 'LIKE', "%".$titre."%")->where("album_id", $id);
         }
 
-        $photoFilter = $query->get();
+        else{
+            $query->where("album_id", $id);
+        }
+
+        $photoFilter = $query->orderBy($order,$by)->get();
 
         return view('pages.album.show', compact('photoFilter','album'));
     }

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-Route::get('/album/filter', [AlbumController::class, 'filter'])->name('albumFilter');
+Route::get('/album/sort', [AlbumController::class, 'sort'])->name('albumSort');
 Route::get('/album/filterPhoto/{id}', [AlbumController::class, 'filterPhotos'])->name('albumFilterPhoto');
 
 Route::group(['middleware' => 'auth'], function(){
