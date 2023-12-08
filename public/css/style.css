@@ -30,84 +30,103 @@
 /* acceuil */
 
 
-.container{
+.container {
     display: flex;
-    max-width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 100px;
-    margin-bottom: 100px;
-    justify-content: space-between;
-  
-  
+    gap: 5%;
+    justify-content: center;
+    margin-top: 5em;
+    margin-bottom: 5em;
+    text-align: center;
+
     
 }
 
-.containertxt{
-   
+.zone{
+    width: 300px;
+    margin-bottom: 4px;
     background-color: #E2BFBF;
-    width: 48%;
-text-align: center;
-border-radius: 20px;
-
-    
+    position: relative;
+    height: 300px;
+    border-radius: 10px;
     
 }
-.containertxt p {
-font-size: 32px;
-margin-top: 15%;
-color: black;
-text-align: center;
-margin-bottom: 75px;
+.image {
+    width: 300px;
+    position: relative;
+    height: 300px;
+    
+}
+
+.image img {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    
+}
+
+
+
+.image button{
+    position: absolute;
+    bottom: 15%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    margin-top: 20px;
+    padding: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    border: none;
+    background-color: #E2BFBF;
+    
+    border-radius: 20px;
+   
+}
+.image button a {
+    text-decoration: none;
+    color: black;
 
 }
 
 
-.containertxt a {
-
- color: black;
- font-size: 32px;
- text-decoration: none;
- background-color: white;
- padding: 0.5em;
- padding-left: 2em;
- padding-right: 2em;
- border-radius: 50px;
-
-
-}
-
-
-.police{
+.zone p {
+    margin-top: 20%;
     font-family: "acumin-pro", sans-serif;
     font-weight: 200;
     font-style: normal;
+    color: black;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size:  16px;
 }
 
-
-    .imageback{
-        width: 48%;
-        position: relative;
-    }
-
-    .imageback img{
-        width: 100%;
-    }
-.imageback a {
-padding: 0.5em;
-padding-left: 1em;
-padding-right: 1em;
-font-size: 32px;
-background-color: #E2BFBF;
-color: black;
-border-radius: 50px;
-text-decoration: none;
-}
-
-.absl {
+.zone button {
+    margin-top: 20px;
+    padding: 1em;
+    padding-left: 4em;
+    padding-right: 4em;
+    border: none;
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    
     position: absolute;
-    top: 60%;
-    left: 25%;
+    text-align: center;
+    bottom: 15%;
+    transform: translate(-50%, -50%);
+}
+.zone button a {
+    
+     text-decoration: none;
+     color: black;
+}
 
+@media screen and (max-width: 632px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .zone {
+        margin-bottom: 20px;
+    }
 }
 /* endacceuil */
