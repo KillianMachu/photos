@@ -6,6 +6,7 @@ use App\Models\Album;
 use App\Models\Photo;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AlbumController extends Controller
 {
@@ -116,7 +117,11 @@ class AlbumController extends Controller
      */
     public function destroy(Album $album)
     {
+
+        $albums = Album::all();
+
         foreach($album->photos as $photo){
+            foreach($albums as $a)
             foreach($photo->tags as $tag){
                 $select = $tag->pivot->where('tag_id', strtolower($tag->pivot->tag_id))->count();
                 if($select==1){
@@ -124,6 +129,11 @@ class AlbumController extends Controller
                 }
             }
             $photo->tags()->detach();
+            $url = $photo->url;
+            $f = "public/".substr($url, strlen("/storage/"));
+            if(Storage::exists($f)){
+                Storage::delete($f);
+            }
             $photo->delete();
         }
         $album->delete();

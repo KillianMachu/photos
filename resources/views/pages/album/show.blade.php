@@ -67,6 +67,7 @@
                 </div>
             </div>
             <button id="add-photo">Ajouter une photo</button>
+            @include("partials.errors")
             <input type="submit" value="Suivant">
         </form>
     @endif

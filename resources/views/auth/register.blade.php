@@ -14,14 +14,7 @@
                 <input type="email" name="email" required placeholder="Email" /><br />
                 <input type="password" name="password" required placeholder="Mot de passe" /><br />
                 <input type="password" name="password_confirmation" required placeholder="Mot de passe" /><br />
-                @if ($errors)
-                @error('email')
-                    <p>{{$message}}</p>
-                @enderror
-                @error('password')
-                    <p>{{$message}}</p>
-                @enderror
-                @endif
+                @include('partials.errors')
                 <input type="submit" id="bouton"/><br />
             </form>
            <p>Déjà un compte  ?</br> <a href="{{route("login")}}">Connectez vous !</a></p>
