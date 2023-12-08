@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/auth.css">
     <link rel="stylesheet" href="https://use.typekit.net/kjw8qrv.css">
     
     <title>Album Photo</title>
@@ -36,7 +37,7 @@
             <a href="{{route("albumIndex")}}">album</a>
             <a href="{{route("tagIndex")}}">tag</a>
              @auth
-            <h3>Bonjour {{Auth::user()->name}}</h3>
+            {{-- <h3>Bonjour {{Auth::user()->name}}</h3> --}}
             <a href="{{route("logout")}}"
             onclick="document.getElementById('logout').submit(); return false;">Logout</a>
             <form id="logout" action="{{route("logout")}}" method="post">

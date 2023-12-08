@@ -32,6 +32,7 @@
 
 .container {
     display: flex;
+
     gap: 5%;
     justify-content: center;
     margin-top: 5em;
@@ -49,7 +50,24 @@
     height: 300px;
     border-radius: 10px;
     
+
+    max-width: 90%;
+   
+
+
+
 }
+
+.containertxt{
+
+    background-color: #E2BFBF;
+    width: 48%;
+text-align: center;
+border-radius: 20px;
+}
+
+
+
 .image {
     width: 300px;
     position: relative;
@@ -84,12 +102,38 @@
 .image button a {
     text-decoration: none;
     color: black;
+    
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 200;
+    font-style: normal;
 
 }
 
 
+
 .zone p {
+    
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 200;
+    font-style: normal;
     margin-top: 20%;
+}
+.containertxt a {
+
+ color: black;
+ font-size: 32px;
+ text-decoration: none;
+ background-color: white;
+ padding: 0.5em;
+ padding-left: 2em;
+ padding-right: 2em;
+ border-radius: 50px;
+
+
+}
+
+.police{
+
     font-family: "acumin-pro", sans-serif;
     font-weight: 200;
     font-style: normal;
@@ -116,6 +160,9 @@
 }
 .zone button a {
     
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 200;
+    font-style: normal;
      text-decoration: none;
      color: black;
 }
