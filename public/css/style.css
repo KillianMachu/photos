@@ -27,21 +27,17 @@
 * {
     margin: 0;
     padding: 0;
-    
+
 }
 
-main{
-    min-height:100%;
-   position:relative;
-   padding-bottom:100px;
-}
+
+
 
 /* acceuil */
 
 
 .container {
     display: flex;
-
     gap: 5%;
     justify-content: center;
     margin-top: 5em;
@@ -195,3 +191,371 @@ main{
 }
 
 /* endacceuil */
+
+
+
+/* show album */
+
+
+.album-show {
+    display: flex;
+    justify-content: center;
+    gap: 15%;
+}
+
+
+.order-album {
+    background-color: #E2BFBF;
+
+    border-radius: 60px;
+    width: 400px;
+    white-space: nowrap;
+
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.search-album {
+    background-color: #E2BFBF;
+    padding: 20px;
+    border-radius: 60px;
+    width: 360px;
+    white-space: nowrap;
+
+
+
+}
+
+.input1 {
+
+    border: none;
+    background-color: #E2BFBF;
+    padding-right: 20px;
+    width: 80%;
+}
+
+.seach-button {
+    background-color: white;
+    border: white;
+    border-radius: 60px;
+    border-radius: 3rem;
+    margin-right: 0.5rem;
+    border: none;
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 200;
+    width: 20%;
+    height: 40px;
+}
+
+.two-select {
+    border-color: white;
+
+    height: 40px;
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 200;
+
+}
+
+.order-submit {
+    margin-left: 10%;
+    border: none;
+    height: 40px;
+    border-radius: 20px;
+    width: 100px;
+    background-color: white;
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 200;
+}
+
+.menue2 {
+
+    border-radius: 0px 20px 20px 0px;
+}
+
+
+
+.menue1 {
+    border-radius: 20px 0px 0px 20px;
+    margin-left: 25px;
+}
+
+.titre {
+    text-align: center;
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 200;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    text-transform: uppercase;
+}
+
+.flex-show {
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+    flex-wrap: wrap;
+    
+
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+    list-style-type: none;
+    margin-top: 40px;
+
+
+}
+
+
+
+
+.show {
+    display: flex;
+    width: 400px;
+    flex-direction: column;
+    background-color: #E2BFBF;
+    align-items: center;
+    text-decoration: none;
+    color: #3D3B3B;
+    border-radius: 10px;
+    margin-bottom: 20px;
+
+}
+
+
+
+.show img {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    width: 360px;
+
+}
+
+.flex-show h3 {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 700;
+    background-color: white;
+    padding: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-radius: 30px;
+}
+
+.tag-album {
+    width: 360px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 200;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 950px) {
+
+    .album-show {
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .order-album {
+        margin-bottom: 20px;
+    }
+
+    .flex-show {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+
+    .show {
+        margin-bottom: 20px;
+    }
+
+}
+
+/* tag show */
+
+.tag-show {
+    display: flex;
+    width: 80%;
+    background-color: #E2BFBF;
+    
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 200;
+    margin-left: 8%;
+    margin-right: 8%;
+    padding: 2%;
+    text-align: center;
+    border-radius: 20px;
+    margin-bottom: 20px;
+
+
+}
+
+.tag-show a {
+    
+    color: #3D3B3B;
+
+    
+}
+.tag-show li {
+    list-style-type: none;
+    width: 25%;
+}
+
+/* album show */
+
+
+.form-albm{
+    background-color: #E2BFBF;
+    padding: 1em;
+    border-radius: 20px;
+    
+
+   
+}
+
+.form-albm select {
+  border-color: #E2BFBF;
+    background-color: white;
+    font-size: 16px;
+    height: 40px;
+}
+.form-albm input {
+    border: none;
+    font-size: 16px;
+    height: 40px;
+}
+
+.album-div-flex{
+display: flex;
+justify-content: flex-start;
+margin-left: 10px;
+}
+
+
+.submit {
+    padding-left: 2em;
+    padding-right: 2em;
+    height: 40px;
+    border-radius: 10px;
+}
+.photo-album {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.photo-album img {
+     width: 600px;
+     aspect-ratio: 16/9;
+     margin-bottom: 20px;
+
+
+}
+.titre2 {
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    
+    
+}
+.photo-album li {
+    list-style-type:none ;
+
+}
+
+.album-tag-show {
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 200;
+    margin-top: 5px;
+    color: #3D3B3B;
+    font-size: 18px;
+}
+
+.photo-album p {
+    font-size: 20px;
+    margin-top: 5px;
+
+    margin-bottom: 15px;
+}
+
+.return {
+    text-align: center;
+    text-decoration: none;
+    color: #3D3B3B;
+    background-color: #E2BFBF;
+    padding: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    display: flex;
+    justify-content: center;
+    margin-left: 43%;
+    margin-right: 43%;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 700;
+
+}
+/* create album*/
+
+.form-create{
+display: flex;
+flex-direction: column;
+align-items: center;
+background-color: #E2BFBF;
+width: 400px;
+justify-content: center;
+margin-bottom: 30px;
+padding-top: 50px;
+padding-bottom: 50px;
+}
+
+.create-container {
+display: flex;
+flex-direction: column;
+    background-color: white;
+    padding: 70px;
+    border-radius: 20px;
+}
+
+.menue {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
+ border: white;
+ background-color: white;
+
+}
+.input-fields input{
+   text-align: center;
+   color: black;
+}
+
+.submite{
+    text-align: center;
+    padding: 1em;
+    border-radius: 20px;
+    margin-top: 25px;
+    background-color: #E2BFBF;
+    border: none;
+}
+.center {
+    display: flex;
+    justify-content: center;
+}
