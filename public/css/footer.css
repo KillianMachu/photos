@@ -5,7 +5,10 @@ footer {
     justify-content: space-around;
     gap : 1rem;
     padding : 5rem 0rem;
+  
+    
 }
+
 
 footer h3{
     font-family: "acumin-pro", sans-serif;
