@@ -2,21 +2,27 @@
 
 @section('content')
 
-<div id="auth">
-    <div class="auth2">
+<div class="auth">
+    <div>
+        <img src="/images/login.jpg" alt="login">
+    </div>
+    <div>
         <div>
-            <h3>Coucou! Nous sommes heureux de te revoir</h3>
-        </div>
-        <div>
+            <h3>Connectez-vous pour créer !</h3>
             <form action="{{route("login")}}" method="post">
                 @csrf
-                <input type="email" name="email" required placeholder="Email" /><br />
-                <input type="password" name="password" required placeholder="Mot de passe" /><br />
-                Se souvenir de moi<input type="checkbox" name="remember" id="case"/><br />
+                <input type="email" name="email" required placeholder="Email" />
+                <input type="password" name="password" required placeholder="Mot de passe" />
+                <div class="remember">
+                    <input type="checkbox" name="remember" id="case"/>
+                    <p>Se souvenir de moi</p>
+                </div>
                 @include("partials.errors")
-                <input type="submit" id="bouton" placeholder="Connexion"/><br />
+                <input type="submit" id="bouton" value="Connexion"/>
             </form>
-            <p>Pas de compte? </br> <a href="{{route("register")}}">Inscrit toi!</a></p>
+            <p><span>OU</span></p>
+            <h3>Inscrivez vous</h3>
+            <a href="{{route("register")}}">S'inscrire</a>
         </div>
     </div>
 </div>

@@ -68,7 +68,7 @@ class PhotoController extends Controller
             }
         }
 
-        return redirect(route("albumShow", $request->input("album_id")));
+        return redirect(route("albumShow", $request->input("album_id")))->with("info_crea", "La photo a bien été ajoutée à l'album !");
     }
 
     /**
@@ -113,6 +113,6 @@ class PhotoController extends Controller
             Storage::delete($f);
         }
         $photo->delete();
-        return redirect(url()->previous());
+        return redirect(url()->previous())->with("info_del", "La photo a bien été supprimée !");
     }
 }

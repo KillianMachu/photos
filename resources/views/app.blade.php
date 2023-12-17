@@ -4,89 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="/index.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/auth.css">
-    <link rel="stylesheet" href="https://use.typekit.net/kjw8qrv.css">
-    
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    {{-- <link rel="stylesheet" href="https://use.typekit.net/kjw8qrv.css"> --}}
+    <link rel="icon" type="image/svg+xml" href="/images/vectors/NP.svg" />
     <title>Album Photo</title>
 </head>
 <body>
-
-   
     
     <header>
-     
-        <nav class="navigation">
-            <a href="{{route("home")}}" class="home">Home</a>
-            <a href="{{route("albumIndex")}}">album</a>
-            <a href="{{route("tagIndex")}}">tag</a>
-             @auth
-            {{-- <h3>Bonjour {{Auth::user()->name}}</h3> --}}
-            <a href="{{route("logout")}}"
-            onclick="document.getElementById('logout').submit(); return false;">Logout</a>
-            <form id="logout" action="{{route("logout")}}" method="post">
-                @csrf
-            </form>
-        @else
-            <a href="{{route("login")}}">connexion</a>
-            @endauth
+        <nav class="navigation container">
+            <div class="left">
+                <div>
+                    <a href="{{route("albumIndex")}}" class="{{ Route::currentRouteName() === "albumIndex" ? 'active-page' : '' }}">Albums</a>
+                    <a href="{{route("tagIndex")}}" class="{{ Route::currentRouteName() === "tagIndex" ? 'active-page' : '' }}">Tags</a>
+                    @auth
+                        <a href="{{route("albumCreate")}}" class="{{ Route::currentRouteName() === "albumCreate" ? 'active-page' : '' }}">Créer un album</a>
+                    @endauth
+                </div>
+            </div>
+            <a href="{{route("home")}}" class="home">NaPicture</a>
+            <div class="right">
+                @auth
+                    {{-- <h3>Bonjour {{Auth::user()->name}}</h3> --}}
+                    <a href="{{route("logout")}}"
+                    onclick="document.getElementById('logout').submit(); return false;" class="log"><i class='bx bx-log-out' ></i>Se déconnecter</a>
+                    <form id="logout" action="{{route("logout")}}" method="post">
+                        @csrf
+                    </form>
+                @else
+                    <a href="{{route("login")}}" class="log"><i class='bx bxs-lock-alt'></i>Connexion</a>
+                @endauth
+            </div>
         </nav>
-        <div class="buthead">
-            <h1>ARTLENS TON ALBUM <br>PARTOUT AVEC TOI</h1>
-        </div>
-<div class="burger">
-        <div id="mySidenav" class="sidenav">
-            <a id="closeBtn" href="#" class="close">&times;</a>
-            <ul>
-              <li><a href="{{route("home")}}">Home</a></li>
-              <li><a href="{{route("albumIndex")}}">Album</a></li>
-              <li><a href="{{route("tagIndex")}}">Tag</a></li>
-              @auth
-              <li><a href="">{{Auth::user()->name}}</a></li>
-              <li><a href="{{route("logout")}}"
-              onclick="document.getElementById('logout').submit(); return false;">Logout</a></li>
-              <form id="logout" action="{{route("logout")}}" method="post">
-                  @csrf
-              </form>
-          @else
-              <li><a href="{{route("login")}}">connexion</a></li>
-              @endauth
-              
-            </ul>
-          </div>
-          
-          <a href="#" id="openBtn">
-            <span class="burger-icon">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-          </a>
-        </div>
-        <script src="/js/script.js"></script>
     </header>
     <main>
+        @if (session('info_crea'))
+            <div class="alert alert-success alert-crea" id="info">
+                <div>
+                    <h4>{{session('info_crea')}}</h4>
+                    <i class='bx bx-x' id='close_info'></i>
+                </div>
+            </div>
+        @endif
+    
+        @if (session('info_del'))
+            <div class="alert alert-success alert-del" id="info">
+                <div>
+                    <h4>{{session('info_del')}}</h4>
+                    <i class='bx bx-x' id='close_info'></i>
+                </div>
+            </div>
+        @endif
     @yield('content')
     </main>
     <footer>
-        <div id="information">
-            <h3>Informations</h3>
-            <ul>
-                <li>Contact</li>
-                <li>Mentions Légales</li>
-                <li>Réseaux sociaux</li>
-            </ul>
+        <div class="container">
+            <div class="left">
+                <a href="{{route("home")}}" class="home title_part_footer">NaPicture</a>
+                <h4>16 Rue de l'Université</h4>
+                <h4>62307 Lens</h4>
+            </div>
+            <div class="right">
+                <div>
+                    <h4>Menu</h4>
+                    <a href="{{route("albumIndex")}}">Albums</a>
+                    <a href="{{route("tagIndex")}}">Tags</a>
+                    @auth
+                        <a href="{{route("albumCreate")}}">Créer un album</a>
+                    @endauth
+                </div>
+                <div>
+                    <h4>Nous suivre</h4>
+                    <div>
+                        <p>Killian Machu</p>
+                        <div>
+                            <a href="https://www.linkedin.com/in/killian-machu/" target="_blank"><i class='bx bxl-linkedin-square'></i></a>
+                            <a href="https://github.com/KillianMachu" target="_blank"><i class='bx bxl-github'></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Benoit Duez</p>
+                        <div>
+                            <a href="https://www.linkedin.com/in/benoit-duez-35bba4276/" target="_blank"><i class='bx bxl-linkedin-square'></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Elanor Filoque</p>
+                        <div>
+                            <a href="https://www.linkedin.com/in/%C3%A9lanor-filoque/" target="_blank"><i class='bx bxl-linkedin-square'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="newsletter">
-            <h3>News letter</h3>
-            <form action="" method="" class="news-letter">
-                <input type="text" name="mail-news" id="mail-news" placeholder="Adresse Mail">
-                <button>Envoyer</button>
-            </form>
-        </div>
+        <p>ⓒ2023, Killian Machu accompagné de Benoit Duez et Elanor Filoque. Tous droits réservés</p>
     </footer>
 </body>
 </html>

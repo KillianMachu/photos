@@ -1,17 +1,75 @@
 @extends('app')
 
 @section('content')
-    <div class="container">
-       
-        <div class="zone">
-            <p>ARTLENS est un site qui te permet de crée et de partager ton album photo a tous nos utilisateurs viens découvrir !</p>
-            <button><a href="">Découvrir</a></button>
+    <div id="home_video">
+        <video autoplay muted loop id="background_video">
+            <source src="/videos/background first page.mp4" type="video/mp4">
+        </video>
+        <div>
+            <h1>Nature en Pixels</h1>
+            <h2>Partagez la Beauté de la Terre à travers Vos Yeux</h2>
+            <h3>Explorez des albums photo inspirants, capturant la diversité étonnante de notre planète. De la douce brise dans les prairies aux sommets enneigés des montagnes, chaque image raconte une histoire personnelle.</h3>
+            <a href="#home_content">Découvrir</a>
         </div>
-        <div class="image">
-        <img src="image/pexels-balázs-benjamin-872514.jpg" alt="apareil photo">
-        <button><a href="">crée mon album</a></button>
-    
     </div>
-
+    <div id="home_content">
+        <div class="discover">
+            <div class="container">
+                <h2>Découvre les albums !</h2>
+                <div>
+                    @if (count($albums)>0)
+                        @for ($i = 0; $i < count($albums); $i++)
+                            <div>
+                                <div class="img_alb_welcome">
+                                    @if(isset($photos[$i]))
+                                        <img src="{{$photos[$i]->url}}" alt="{{$photos[$i]->titre}}">
+                                    @else
+                                        <img style="object-fit: contain" src="/images/vectors/empty.svg" alt="empty">
+                                    @endif
+                                </div>
+                                <div class="desc_alb_welcome">
+                                    <h3>{{$albums[$i]->titre}}</h3>
+                                    @if ($users[$i])
+                                        <h4>Créé par <i>{{$users[$i]}}</i>, le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
+                                    @else
+                                        <h4>Créé le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
+                                    @endif
+                                    <div>
+                                        <a href="{{route("albumShow", $albums[$i]->id)}}" class="button visit"><span>Parcourir l'album</span></a>
+                                        @if (isset(Auth::user()->id) && Auth::user()->id == $albums[$i]->user_id)
+                                            <form action="{{route("albumDestroy", $albums[$i]->id)}}" method="post">
+                                                @csrf
+                                                @method("delete")
+                                                <a href="#" onclick="document.getElementById('alb_delete_welcome').click()" class="button delete"><span>Supprimer l'album</span></a>
+                                                <input type="submit" value="Supprimer l'album" id="alb_delete_welcome">
+                                            </form>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endfor 
+                    @else
+                        <p class="empty">Oups, il semblerait qu'aucun album n'ait était créé. Soit le premier à en créer un !</p>
+                        <img class="empty" src="/images/vectors/empty.svg" alt="empty">
+                    @endif
+                </div>
+                <div><a href="{{route("albumIndex")}}"><span>Voir tous les albums</span></a></div>
+            </div>
+        </div>
+        <div class="create">
+            <div class="container">
+                <h2>Crée ton propre album !</h2>
+                <div>
+                    <div class="create_content">
+                        <h3>Votre Vision, Votre Histoire, Votre Album</h3>
+                        <h4>Capturez les moments spéciaux avec la nature et construisez votre album photo personnel. Exprimez votre passion pour la nature à travers des images qui racontent votre histoire unique. Rejoignez notre communauté et découvrez la richesse visuelle de la nature.</h4>
+                        <a href="{{route("albumCreate")}}"><span>Créer mon album</span></a>
+                    </div>
+                    <div class="create_img">
+                        <img src="/images/albumCreate.jpg" alt="albumCreate">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

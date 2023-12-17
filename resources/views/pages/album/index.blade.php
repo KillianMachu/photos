@@ -1,35 +1,56 @@
 @extends('app')
 
 @section('content')
-    <h1 class="titre">Voici la liste des albums</h1>
-<div class="album-show">
-    <form action="{{route("albumIndex")}}" method="GET" class="order-album">
-        <select name="order" id="order" class="two-select menue1">
-            <option value="titre">Titre</option>
-            <option value="created_at">Date de création</option>
-        </select>
-        <select name="by" id="by" class="two-select menue2">
-            <option value="asc">Croissant</option>
-            <option value="desc"">Décroissant</option> 
-        </select>
-        <input type="submit" value="Trier" class="order-submit">
-    </form>
-    <form action="{{route("albumSort")}}" method="GET" class="search-album">
-        <input type="search" name="search" id="search" value="{{request()->get('search')}}" placeholder="Rechercher" class="input1">
-        <input type="submit" value="envoyer" class="seach-button">
-    </form>
-</div>
-
-    <ul class="flex-show">
-        @foreach ($albums as $a)
-            <li><a href="{{route('albumShow', $a->id)}}" class="show"> <h3>{{$a->titre}}</h3>
-            <img src="/image/cyberpunk.jpeg" alt="">
-            <div class="tag-album">
-            <span>#cyberpunk</span>
-            <span>#futur</span>
+    <div class="albumIndex">
+        <div class="discover">
+            <div class="container">
+                @if (isset($result))
+                    @if (count($albums)==1)
+                        <h2>Résultat de la recherche : "{{$result}}"</h2>
+                    @else
+                        <h2>Résultats de la recherche : "{{$result}}"</h2>
+                    @endif
+                @else
+                    <h2>Découvre les albums !</h2>
+                @endif
+                <div>
+                    @if (count($albums)>0)
+                        @for ($i = 0; $i < count($albums); $i++)
+                            <div>
+                                <div class="img_alb_welcome">
+                                    @if(isset($photos[$i]))
+                                        <img src="{{$photos[$i]->url}}" alt="{{$photos[$i]->titre}}">
+                                    @else
+                                        <img style="object-fit: contain" src="/images/vectors/empty.svg" alt="empty">
+                                    @endif
+                                </div>
+                                <div class="desc_alb_welcome">
+                                    <h3>{{$albums[$i]->titre}}</h3>
+                                    @if ($users[$i])
+                                        <h4>Créé par <i>{{$users[$i]}}</i>, le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
+                                    @else
+                                        <h4>Créé le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
+                                    @endif
+                                    <div>
+                                        <a href="{{route("albumShow", $albums[$i]->id)}}" class="button visit"><span>Parcourir l'album</span></a>
+                                        @if (isset(Auth::user()->id) && Auth::user()->id == $albums[$i]->user_id)
+                                            <form action="{{route("albumDestroy", $albums[$i]->id)}}" method="post">
+                                                @csrf
+                                                @method("delete")
+                                                <a href="#" onclick="document.getElementById('alb_delete_welcome').click()" class="button delete"><span>Supprimer l'album</span></a>
+                                                <input type="submit" value="Supprimer l'album" id="alb_delete_welcome">
+                                            </form>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endfor 
+                    @else
+                        <p class="empty">Oups, il semblerait qu'aucun album n'ait était créé. Soit le premier à en créer un !</p>
+                        <img class="empty" src="/images/vectors/empty.svg" alt="empty">
+                    @endif
+                </div>
+            </div>
         </div>
-        </a></li>            
-        @endforeach
-        
-    </ul>
+    </div>
 @endsection

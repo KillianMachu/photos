@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [WelcomeController::class, 'WelcomeShow'])->name('home');
+
+
 Route::get('/album/sort', [AlbumController::class, 'sort'])->name('albumSort');
 Route::get('/album/filterPhoto/{id}', [AlbumController::class, 'filterPhotos'])->name('albumFilterPhoto');
 

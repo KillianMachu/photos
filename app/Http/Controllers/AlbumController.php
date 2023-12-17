@@ -20,8 +20,17 @@ class AlbumController extends Controller
         $by = $request->input("by") ?? "asc";
 
         $albums = Album::orderBy($order,$by)->get();
+        
+        $photos = [];
 
-        return view('pages.album.index', ["albums" => $albums]);
+        $users = [];
+
+        foreach ($albums as $album){
+            $photos[] = Photo::whereRaw('LOWER(album_id) = ?', $album->id)->inRandomOrder()->first();
+            $album->user_id ? $users[] = $album->user->name : $users[] = null;
+        }
+
+        return view('pages.album.index', compact("albums", "photos", "users"));
     }
 
     /**
@@ -85,7 +94,7 @@ class AlbumController extends Controller
             }
         }
 
-        return redirect(route("albumShow", $album->id));
+        return redirect(route("albumShow", $album->id))->with("info_crea", "L'album a bien été créé !");
     }
 
     /**
@@ -137,7 +146,7 @@ class AlbumController extends Controller
             $photo->delete();
         }
         $album->delete();
-        return redirect(route("albumIndex"));
+        return redirect(route("albumIndex"))->with("info_del", "L'album a bien été supprimé !");
     }
 
     public function sort(Request $request){
@@ -145,7 +154,18 @@ class AlbumController extends Controller
             $albums = Album::where('titre', 'like', "%".$request->input('search')."%")->get();
         }
 
-        return view("pages.album.index", ["albums" => $albums]);
+        $result = $request->input("search");
+
+        $photos = [];
+
+        $users = [];
+
+        foreach ($albums as $album){
+            $photos[] = Photo::whereRaw('LOWER(album_id) = ?', $album->id)->inRandomOrder()->first();
+            $album->user_id ? $users[] = $album->user->name : $users[] = null;
+        }
+
+        return view('pages.album.index', compact("albums", "photos", "users", "result"));
     }
 
     public function filterPhotos(Request $request, $id){
