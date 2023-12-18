@@ -4,11 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const addPhoto = document.getElementById("add-photo")
     const form = document.querySelector("#add>.create-container>.input-fields")
 
-    const box = `<input type="text" name="titre-photo[]" required placeholder="Titre"><input type="file" name="image[]" required><input type="number" name="note[]" min="0" max="10" required placeholder="Note"><input type="text" name="tags[]" required placeholder="Les tags"><button id="remove-photo">Supprimer la photo</button>`
+    const box = `<input type="text" name="titre-photo[]" required placeholder="Titre"><input type="file" name="image[]" required><input type="number" name="note[]" min="0" max="5" required placeholder="Note"><input type="text" name="tags[]" required placeholder="Les tags"><button id="remove-photo">Supprimer la photo</button>`
 
     // const box = `<input type="text" name="titre-photo[]" required placeholder="Titre"><input type="text" name="url[]" required placeholder="Lien de l'image"><input type="number" name="note[]" required placeholder="Note"><input type="text" name="tags[]" required placeholder="Les tags"><button id="remove-photo">Supprimer la photo</button>`
 
-    const closeButton = document.querySelector("#photoBig>div>button")
+    const closeButton = document.querySelector("#photoBig>button")
 
     if (addPhoto) {
         addPhoto.addEventListener("click", (e) => {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     function removePhoto(){
-        const photos = document.querySelectorAll("#add>.input-fields>div")
+        const photos = document.querySelectorAll("#add>.create-container>.input-fields>div")
         if (photos) {
             photos.forEach(photo => {
                 photo.querySelector("#remove-photo").addEventListener("click", (e) => {

@@ -2,11 +2,14 @@
 
 @section('content')
 
-<h1  class="titre">Voici la liste des tags</h1>
-<ul class="tag-show">
-    @foreach($tags as $t)
-    <li><a href="{{route("tagShow",$t->id)}}">{{$t->nom}}</a></li>
-    @endforeach
-</ul>
+<div class="container tagsIndex">
+    <h1 class="titre">Certaines catégories de photos t'intéressent ?</h1>
+    <h2>Naviguez à travers les tags pour découvrir votre coin de nature préféré</h2>
+    <div class="tags">
+        @foreach($tags as $t)
+        <a href="{{route("tagShow",$t->id)}}">{{$t->nom}}<i class='bx bx-search' ></i></a>
+        @endforeach
+    </div>
+</div>
 
 @endsection

@@ -16,7 +16,7 @@
         <div class="discover">
             <div class="container">
                 <h2>Découvre les albums !</h2>
-                <div>
+                <div class="albums">
                     @if (count($albums)>0)
                         @for ($i = 0; $i < count($albums); $i++)
                             <div>
@@ -40,8 +40,8 @@
                                             <form action="{{route("albumDestroy", $albums[$i]->id)}}" method="post">
                                                 @csrf
                                                 @method("delete")
-                                                <a href="#" onclick="document.getElementById('alb_delete_welcome').click()" class="button delete"><span>Supprimer l'album</span></a>
-                                                <input type="submit" value="Supprimer l'album" id="alb_delete_welcome">
+                                                <a href="#" onclick="document.getElementById('alb_delete_welcome{{$albums[$i]->id}}').click()" class="button delete"><span><i class='bx bxs-trash' ></i>Supprimer l'album</span></a>
+                                                <input type="submit" value="Supprimer l'album" id="alb_delete_welcome{{$albums[$i]->id}}">
                                             </form>
                                         @endif
                                     </div>

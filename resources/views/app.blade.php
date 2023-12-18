@@ -7,7 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     {{-- <link rel="stylesheet" href="https://use.typekit.net/kjw8qrv.css"> --}}
-    <link rel="icon" type="image/svg+xml" href="/images/vectors/NP.svg" />
+    <link rel="icon" type="image/svg+xml" href="{{asset('images/vectors/NP.svg')}}" />
     <title>Album Photo</title>
 </head>
 <body>

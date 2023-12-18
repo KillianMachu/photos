@@ -11,7 +11,7 @@
             <h3>Inscris-toi pour commencer à partager</h3>
             <form action="{{route("register")}}" method="post">
                 @csrf
-                <input type="text" name="name" required placeholder="Nom  " />
+                <input type="text" name="name" required placeholder="Nom" value="{{old('name')}}" />
                 <input type="email" name="email" required placeholder="Email" />
                 <input type="password" name="password" required placeholder="Mot de passe" />
                 <input type="password" name="password_confirmation" required placeholder="Confirmation du mot de passe" />

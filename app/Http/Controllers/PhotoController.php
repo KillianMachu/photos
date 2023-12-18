@@ -102,8 +102,8 @@ class PhotoController extends Controller
     {
         foreach($photo->tags as $tag){
             $select = $tag->pivot->where('tag_id', strtolower($tag->pivot->tag_id))->count();
-            if($select==1){
-                $photo->tags()->delete();
+            if($select===1){
+                $tag->delete();
             }
         }
         $photo->tags()->detach();

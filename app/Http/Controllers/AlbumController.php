@@ -19,7 +19,11 @@ class AlbumController extends Controller
         $order = $request->input("order")?? "titre";
         $by = $request->input("by") ?? "asc";
 
-        $albums = Album::orderBy($order,$by)->get();
+        if($request->has("search")){
+            $albums = Album::where('titre', 'like', "%".$request->input('search')."%")->orderBy($order,$by)->get();
+        }else{
+            $albums = Album::orderBy($order,$by)->get();
+        }
         
         $photos = [];
 
@@ -127,14 +131,11 @@ class AlbumController extends Controller
     public function destroy(Album $album)
     {
 
-        $albums = Album::all();
-
         foreach($album->photos as $photo){
-            foreach($albums as $a)
             foreach($photo->tags as $tag){
                 $select = $tag->pivot->where('tag_id', strtolower($tag->pivot->tag_id))->count();
                 if($select==1){
-                    $photo->tags()->delete();
+                    $tag->delete();
                 }
             }
             $photo->tags()->detach();

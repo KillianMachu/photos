@@ -4,6 +4,9 @@
     <div class="albumIndex">
         <div class="discover">
             <div class="container">
+
+                {{-- Si l'on effectue une recherche --}}
+
                 @if (isset($result))
                     @if (count($albums)==1)
                         <h2>Résultat de la recherche : "{{$result}}"</h2>
@@ -13,7 +16,36 @@
                 @else
                     <h2>Découvre les albums !</h2>
                 @endif
-                <div>
+
+                {{-- Formulaire de recherche + tri --}}
+
+                <div class="albumFilter">
+                    <form action="{{route("albumSort")}}" method="GET" class="searchAlbum">
+                        <input type="search" name="search" id="search" value="{{request()->get('search')}}" placeholder="Rechercher">
+                        <a href="#" onclick="document.getElementById('submitSearchAlbum').click()"><i class='bx bx-search'></i></a>
+                        <input type="submit" value="envoyer" class="albumSearchButton" id="submitSearchAlbum">
+                    </form>
+                    <form action="{{route("albumIndex")}}" method="GET" class="orderAlbum">
+                        @if(request()->has('search'))
+                            <input type="hidden" name="search" value="{{request()->get('search')}}">
+                        @endif
+                        <select name="order" id="order">
+                            <option value="" disabled selected hidden>Trier selon ...</option>
+                            <option value="titre" {{(request()->get('order')=="titre" ? "selected" : false)}}>Titre</option>
+                            <option value="created_at" {{(request()->get('order')=="created_at" ? "selected" : false)}}>Date de création</option>
+                        </select>
+                        <select name="by" id="by">
+                            <option value="" disabled selected hidden>Par ordre ...</option>
+                            <option value="asc" {{(request()->get('by')=="asc" ? "selected" : false)}}>Croissant</option>
+                            <option value="desc" {{(request()->get('by')=="desc" ? "selected" : false)}}>Décroissant</option> 
+                        </select>
+                        <input type="submit" value="Trier" class="orderSubmit">
+                    </form>
+                </div>
+
+                {{-- Affichage des albums --}}
+
+                <div class="albums">
                     @if (count($albums)>0)
                         @for ($i = 0; $i < count($albums); $i++)
                             <div>
@@ -31,14 +63,14 @@
                                     @else
                                         <h4>Créé le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
                                     @endif
-                                    <div>
+                                    <div class="buttons">
                                         <a href="{{route("albumShow", $albums[$i]->id)}}" class="button visit"><span>Parcourir l'album</span></a>
                                         @if (isset(Auth::user()->id) && Auth::user()->id == $albums[$i]->user_id)
                                             <form action="{{route("albumDestroy", $albums[$i]->id)}}" method="post">
                                                 @csrf
                                                 @method("delete")
-                                                <a href="#" onclick="document.getElementById('alb_delete_welcome').click()" class="button delete"><span>Supprimer l'album</span></a>
-                                                <input type="submit" value="Supprimer l'album" id="alb_delete_welcome">
+                                                <a href="#" onclick="document.getElementById('alb_delete_welcome{{$albums[$i]->id}}').click()" class="button delete"><span><i class='bx bxs-trash' ></i>Supprimer l'album</span></a>
+                                                <input type="submit" value="Supprimer l'album" id="alb_delete_welcome{{$albums[$i]->id}}">
                                             </form>
                                         @endif
                                     </div>
@@ -46,9 +78,30 @@
                             </div>
                         @endfor 
                     @else
-                        <p class="empty">Oups, il semblerait qu'aucun album n'ait était créé. Soit le premier à en créer un !</p>
-                        <img class="empty" src="/images/vectors/empty.svg" alt="empty">
+                            @if (isset($result))
+                                <p class="empty">Aucun album correspondant à la recherche</p>
+                                <img class="empty" src="/images/vectors/empty.svg" alt="empty">
+                            @else
+                                <p class="empty">Oups, il semblerait qu'aucun album n'ait était créé. Sois le premier à en créer un !</p>
+                                <img class="empty" src="/images/vectors/empty.svg" alt="empty">
+                            @endif
                     @endif
+
+                    {{-- Si l'on est connecté : Bouton de création d'album --}}
+
+                    @auth
+                        <div>
+                            <div class="img_alb_welcome">
+                                <img style="object-fit: contain" src="/images/vectors/create.svg" alt="empty">
+                            </div>
+                            <div class="desc_alb_welcome">
+                                <h3>Crée ton album</h3>
+                                <div>
+                                    <a href="{{route("albumCreate")}}" class="button visit"><span>Créer</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    @endauth
                 </div>
             </div>
         </div>

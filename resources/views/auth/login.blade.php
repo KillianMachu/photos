@@ -11,7 +11,7 @@
             <h3>Connectez-vous pour créer !</h3>
             <form action="{{route("login")}}" method="post">
                 @csrf
-                <input type="email" name="email" required placeholder="Email" />
+                <input type="email" name="email" required placeholder="Email" value="{{old('email')}}" />
                 <input type="password" name="password" required placeholder="Mot de passe" />
                 <div class="remember">
                     <input type="checkbox" name="remember" id="case"/>
