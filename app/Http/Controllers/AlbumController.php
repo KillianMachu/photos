@@ -16,8 +16,8 @@ class AlbumController extends Controller
     public function index(Request $request)
     {
 
-        $order = $request->input("order")?? "titre";
-        $by = $request->input("by") ?? "asc";
+        $order = $request->input("order") == "titre" || $request->input("order") == "creation" ? $request->input("order") : "titre";
+        $by = $request->input("by")== "asc" || $request->input("by")== "desc" ? $request->input("by") : "asc";
 
         if($request->has("search")){
             $albums = Album::where('titre', 'like', "%".$request->input('search')."%")->orderBy($order,$by)->get();
@@ -155,8 +155,6 @@ class AlbumController extends Controller
             $albums = Album::where('titre', 'like', "%".$request->input('search')."%")->get();
         }
 
-        $result = $request->input("search");
-
         $photos = [];
 
         $users = [];
@@ -166,7 +164,7 @@ class AlbumController extends Controller
             $album->user_id ? $users[] = $album->user->name : $users[] = null;
         }
 
-        return view('pages.album.index', compact("albums", "photos", "users", "result"));
+        return view('pages.album.index', compact("albums", "photos", "users"));
     }
 
     public function filterPhotos(Request $request, $id){

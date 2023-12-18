@@ -41,7 +41,7 @@
                                                 @csrf
                                                 @method("delete")
                                                 <a href="#" onclick="document.getElementById('alb_delete_welcome{{$albums[$i]->id}}').click()" class="button delete"><span><i class='bx bxs-trash' ></i>Supprimer l'album</span></a>
-                                                <input type="submit" value="Supprimer l'album" id="alb_delete_welcome{{$albums[$i]->id}}">
+                                                <input type="submit" value="Supprimer l'album" id="alb_delete_welcome{{$albums[$i]->id}}" class="alb_delete_welcome">
                                             </form>
                                         @endif
                                     </div>

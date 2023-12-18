@@ -3,21 +3,30 @@
 @section('content')
 
 <div class="container albumShow">
-    <h1 class="titre">{{$album->titre}}</h1>
-    <div class="album-div-flex">
+    @if (request()->input("titre") && !request()->input("tag"))
+        <h2>Résultat de la recherche pour le titre : "{{request()->input("titre")}}", dans l'album {{$album->titre}}</h2>
+    @elseIf (request()->input("tag") && !request()->input("titre"))
+        <h2>Résultat de la recherche pour le tag : "{{request()->input("tag")}}", dans l'album {{$album->titre}}</h2>
+    @elseIf (request()->input("tag") && request()->input("titre"))
+        <h2>Résultat de la recherche pour le titre : "{{request()->input("titre")}}" et le tag : "{{request()->input("tag")}}", dans l'album {{$album->titre}}</h2>
+    @else
+        <h2>{{$album->titre}}</h2>
+    @endif
+    <div class="photoFilter">
         <form action="{{route("albumFilterPhoto", "$album->id")}}" method="GET" class="form-albm">
-        
             <select name="order" id="order">
-                <option value="titre">Titre</option>
-                <option value="note">Note</option>
+                <option value="" disabled selected hidden>Trier selon ...</option>
+                <option value="titre" {{(request()->get('order')=="titre" ? "selected" : false)}}>Titre</option>
+                <option value="note" {{(request()->get('order')=="note" ? "selected" : false)}}>Note</option>
             </select>
             <select name="by" id="by" >
-                <option value="asc">Croissant</option>
-                <option value="desc">Décroissant</option>
+                <option value="" disabled selected hidden>Par ordre ...</option>
+                <option value="asc" {{(request()->get('by')=="asc" ? "selected" : false)}}>Croissant</option>
+                <option value="desc" {{(request()->get('by')=="desc" ? "selected" : false)}}>Décroissant</option>
             </select>
-            <input type="text" name="titre" id="titre" placeholder="titre">
-            <input type="text" name="tag" id="tag" placeholder="tag">
-            <input type="submit" class="submit">
+            <input type="text" name="titre" id="titre" placeholder="titre" value="{{request()->get('titre')}}">
+            <input type="text" name="tag" id="tag" placeholder="tag", value="{{request()->get('tag')}}">
+            <input type="submit" class="submit" value="Filtrer">
         </form>
     </div>
     @auth
@@ -38,42 +47,50 @@
     </div>
 
     <div class="photos">
-            @forelse (isset($photoFilter) && $photoFilter ? $photo=$photoFilter : $photo=$album->photos as $p)
-                <div>
-                    <div class="img_photo">
-                        <i class='bx bx-expand'></i>
-                        <img id="photoShow" src="{{$p->url}}" alt="{{$p->titre}}">
+        @forelse (isset($photoFilter) && $photoFilter ? $photo=$photoFilter : $photo=$album->photos as $p)
+            <div>
+                <div class="img_photo">
+                    <i class='bx bx-expand'></i>
+                    <img id="photoShow" src="{{$p->url}}" alt="{{$p->titre}}">
+                </div>
+                <div class="desc_photo">
+                    <h3>{{$p->titre}}</h3>
+                    {{-- @if ($users[$i])
+                        <h4>Créé par <i>{{$users[$i]}}</i>, le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
+                    @else --}}
+                    <h4>Importée le <i>{{date('j F Y', strtotime($p->created_at))}}</i></h4>
+                    <div class="tags">
+                        <i class='bx bxs-purchase-tag'></i>
+                        @foreach ($p->tags as $tag)
+                            <a href="{{route("tagShow", $tag->id)}}" class="album-tag-show">{{$tag->nom}}</a>
+                        @endforeach
                     </div>
-                    <div class="desc_photo">
-                        <h3>{{$p->titre}}</h3>
-                        {{-- @if ($users[$i])
-                            <h4>Créé par <i>{{$users[$i]}}</i>, le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
-                        @else --}}
-                        <h4>Importée le <i>{{date('j F Y', strtotime($p->created_at))}}</i></h4>
-                        <div class="tags">
-                            <i class='bx bxs-purchase-tag'></i>
-                            @foreach ($p->tags as $tag)
-                                <a href="{{route("tagShow", $tag->id)}}" class="album-tag-show">{{$tag->nom}}</a>
-                            @endforeach
-                        </div>
-                        <p>Note : <b>{{$p->note}}/5</b></p>
-                        <div class="buttons">
-                            @if (isset(Auth::user()->id) && Auth::user()->id == $album->user_id)
-                                <form action="{{route("photoDestroy", $p->id)}}" method="post">
-                                    @csrf
-                                    @method("delete")
-                                    <a href="#" onclick="document.getElementById('photo_delete{{$p->id}}').click()" class="button delete"><span><i class='bx bxs-trash' ></i>Supprimer la photo</span></a>
-                                    <input type="submit" value="Supprimer la photo" id="photo_delete{{$p->id}}">
-                                </form>
-                            @endif
-                        </div>
+                    <p>Note : <b>{{$p->note}}/5</b></p>
+                    <div class="buttons">
+                        @if (isset(Auth::user()->id) && Auth::user()->id == $album->user_id)
+                            <form action="{{route("photoDestroy", $p->id)}}" method="post">
+                                @csrf
+                                @method("delete")
+                                <a href="#" onclick="document.getElementById('photo_delete{{$p->id}}').click()" class="button delete"><span><i class='bx bxs-trash' ></i>Supprimer la photo</span></a>
+                                <input type="submit" value="Supprimer la photo" id="photo_delete{{$p->id}}" class="photo_delete">
+                            </form>
+                        @endif
                     </div>
                 </div>
-                
-            @empty
-            <p>aucune photo trouvée</p>
-            @endforelse
-</div>
+            </div>
+            
+        @empty
+        <div class="empty-zone">
+            @if (request()->input("titre")||request()->input("tag"))
+                <p class="empty">Aucun album correspondant à la recherche</p>
+                <img class="empty" src="/images/vectors/empty.svg" alt="empty">
+            @else
+                <p class="empty">Oups, il semblerait qu'aucun album n'ait était créé. Sois le premier à en créer un !</p>
+                <img class="empty" src="/images/vectors/empty.svg" alt="empty">
+            @endif
+        </div>
+        @endforelse
+    </div>
 
 
     </ul>

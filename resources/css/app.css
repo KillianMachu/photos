@@ -310,13 +310,13 @@ main{
     backdrop-filter: brightness(80%);
 }
 
-.discover>.container>h2, #home_content>.create>.container>h2{
+.discover>.container>h2, #home_content>.create>.container>h2, .tagShow>h2{
     text-align: center;
     padding: 1em 0 0 0;
     font-size: 3em;
 }
 
-.discover>.container>.albums, .albumShow.container>.photos{
+.discover>.container>.albums, .albumShow.container>.photos, .tagShow.container>.photos{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 2em;
@@ -326,13 +326,13 @@ main{
     flex-wrap: wrap;
 }
 
-.discover>.container>.albums>div>.img_alb_welcome, .albumShow.container>.photos>div>.img_photo{
+.discover>.container>.albums>div>.img_alb_welcome, .albumShow.container>.photos>div>.img_photo, .tagShow.container>.photos>div>.img_photo{
     aspect-ratio: 16/9;
     overflow: hidden;
     display: flex;
 }
 
-.discover>.container>.albums>div, .albumShow.container>.photos>div{
+.discover>.container>.albums>div, .albumShow.container>.photos>div, .tagShow.container>.photos>div{
     width: 100%;
     margin: auto;
     border-radius: .5em;
@@ -344,22 +344,22 @@ main{
     background-color: white;
 }
 
-.albumShow.container>.photos>div{
+.albumShow.container>.photos>div, .tagShow.container>.photos>div{
     backdrop-filter: brightness(90%);
 }
 
-.discover>.container>.albums>div>.img_alb_welcome>img, .albumShow.container>.photos>div>.img_photo>img{
+.discover>.container>.albums>div>.img_alb_welcome>img, .albumShow.container>.photos>div>.img_photo>img, .tagShow.container>.photos>div>.img_photo>img{
     object-fit: cover;
     width: 100%;
     height: 100%;
     object-position: top;
 }
 
-.discover>.container>.albums>div>.desc_alb_welcome, .albumShow.container>.photos>div>.desc_photo{
+.discover>.container>.albums>div>.desc_alb_welcome, .albumShow.container>.photos>div>.desc_photo, .tagShow.container>.photos>div>.desc_photo{
     padding: 1em;
 }
 
-.discover>.container>.albums>div>.desc_alb_welcome>h3, .albumShow.container>.photos>div>.desc_photo>h3{
+.discover>.container>.albums>div>.desc_alb_welcome>h3, .albumShow.container>.photos>div>.desc_photo>h3, .tagShow.container>.photos>div>.desc_photo>h3{
     text-align: center;
     margin-top: .5em;
     font-size: 1.5em;
@@ -377,7 +377,7 @@ main{
     font-weight: 500;
 }
 
-.discover>.container>.albums>div>.desc_alb_welcome .button, .discover>.container>div>a, .albumShow.container>.photos>div>.desc_photo .button{
+.discover>.container>.albums>div>.desc_alb_welcome .button, .discover>.container>div>a, .albumShow.container>.photos>div>.desc_photo .button, .tagShow.container>.photos>div>.desc_photo .button{
     text-align: center;
     font-size: 1.25em;
     text-decoration: none;
@@ -390,7 +390,7 @@ main{
     background: none;
 }
 
-.discover>.container>.albums>div>.desc_alb_welcome .button:before, .discover>.container>div:last-child>a:before, .albumShow.container>.photos>div>.desc_photo .button:before{
+.discover>.container>.albums>div>.desc_alb_welcome .button:before, .discover>.container>div:last-child>a:before, .albumShow.container>.photos>div>.desc_photo .button:before, .tagShow.container>.photos>div>.desc_photo .button:before{
     transition: all 0.85s cubic-bezier(0.68, 0, 0.265, 1);
     content: '';
     width: 0%;
@@ -400,7 +400,7 @@ main{
     left: 0;
 }
 
-.discover>.container>.albums>div>.desc_alb_welcome .button.visit:before, .discover>.container>div:last-child>a:before, .albumShow.container>.photos>div>.desc_photo .button:before{
+.discover>.container>.albums>div>.desc_alb_welcome .button.visit:before, .discover>.container>div:last-child>a:before, .albumShow.container>.photos>div>.desc_photo .button:before, .tagShow.container>.photos>div>.desc_photo .button:before{
     background: black;
 }
 
@@ -408,6 +408,10 @@ main{
     background-color: white;
     width: fit-content;
     margin: 0 auto;
+}
+
+.tagShow.container>.photos>div>.desc_photo>div>a.button{
+    background-color: white;
 }
 
 .discover>.container>div:last-child{
@@ -418,11 +422,11 @@ main{
     background: rgb(213, 158, 158);
 }
 
-.discover>.container>.albums>div>.desc_alb_welcome #alb_delete_welcome, .albumShow.container>.photos>div>.desc_photo #photo_delete{
+.discover>.container>.albums>div>.desc_alb_welcome .alb_delete_welcome, .albumShow.container>.photos>div>.desc_photo .photo_delete{
     display: none;
 }
 
-.discover>.container>.albums>div>.desc_alb_welcome .button:hover:before, .discover>.container>div:last-child>a:hover:before, .albumShow.container>.photos>div>.desc_photo .button:hover:before{
+.discover>.container>.albums>div>.desc_alb_welcome .button:hover:before, .discover>.container>div:last-child>a:hover:before, .albumShow.container>.photos>div>.desc_photo .button:hover:before, .tagShow.container>.photos>div>.desc_photo .button:hover:before{
     width: 100%;
 }
 
@@ -431,7 +435,7 @@ main{
     font-size: 1.5em;
 }
 
-.discover>.container>.albums>div>.desc_alb_welcome .button>span, .discover>.container>div:last-child>a>span, .albumShow.container>.photos>div>.desc_photo>.buttons>form>a>span{
+.discover>.container>.albums>div>.desc_alb_welcome .button>span, .discover>.container>div:last-child>a>span, .albumShow.container>.photos>div>.desc_photo>.buttons>form>a>span, .tagShow.container>.photos>div>.desc_photo>.buttons>a>span{
     text-align: center;
     z-index: 1;
     margin: auto;
@@ -439,7 +443,7 @@ main{
     display: flex;
 }
 
-.discover>.container>.albums>div>.desc_alb_welcome .visit>span, .discover>.container>div:last-child>a>span{
+.discover>.container>.albums>div>.desc_alb_welcome .visit>span, .discover>.container>div:last-child>a>span, .tagShow.container>.photos>div>.desc_photo>div>a>span{
     color: white;
     mix-blend-mode: difference;
     font-weight: 500;
@@ -745,6 +749,49 @@ main{
 
 /* SHOW */
 
+.albumShow>h2{
+    text-align: center;
+    padding: 1em 0 0 0;
+    font-size: 3em;
+}
+
+.photoFilter>form>*{
+    font-size: 1.25em;
+    padding: 0.5em 2em 0.5em 1em;
+    border-radius: 5px;
+    border: none;
+    margin-left: 1em;
+    background-color: inherit;
+    backdrop-filter: brightness(80%);
+}
+
+.photoFilter>form>select>option{
+    background-color: rgb(204, 204, 204);
+}
+
+.photoFilter>form>select{
+    border-right: 16px solid transparent;
+}
+
+.photoFilter>form>input[type="submit"]{
+    cursor: pointer;
+    text-align: center;
+    padding: 0.5em 1em;
+    color: white;
+    background-color: #121212;
+}
+
+.photoFilter>form>input[type="text"]{
+    font-size: 1.25em;
+    padding: 0.5em 2em 0.5em 1em;
+    border-radius: 5px;
+    border: none;
+}
+
+.photoFilter>form>input:focus, .photoFilter>form>select:focus{
+    outline: none;
+}
+
 #photoBig {
     display: none;
     position: fixed;
@@ -756,13 +803,11 @@ main{
     z-index: 1;
 }
 
-
-
 #photoBig>div {
     position: absolute;
-    width: 80vw;
+    width: fit-content;
     max-width: 1100px;
-    height: 80vh;
+    height: fit-content;
     opacity: 1;
     top: 50%;
     left: 50%;
@@ -771,7 +816,8 @@ main{
 }
 
 #photoBig>div>img {
-    width: 100%;
+    max-height: 80vh;
+    max-width: 80vh;
 }
 
 #photoBig>button{
@@ -787,6 +833,32 @@ main{
 
 #photoShow{
     cursor: pointer;
+}
+
+.albumShow.container>.photos>.empty-zone, .albumIndex>.discover>.container>.albums>.empty-zone{
+    grid-column: 1 / span 5;
+    width: 100%;
+    backdrop-filter: inherit;
+    background-color: inherit;
+}
+
+.albumShow.container>.photos:has(.empty-zone), .albumIndex>.discover>.container>.albums:has(.empty-zone){
+    margin: 0;
+    width: 100%;
+}
+
+.albumShow.container>.photos>.empty-zone>p, .albumIndex>.discover>.container>.albums>.empty-zone>p{
+    font-size: 1.5em;
+}
+
+.empty-zone>p.empty{
+    text-align: center;
+}
+
+.empty-zone>img.empty{
+    width: 50%;
+    margin: auto;
+    display: flex;
 }
 
 .albumShow.container>.photos>div>.desc_photo>h4{
@@ -880,7 +952,6 @@ main{
 }
 
 
-
 /* TAGS */
 
 .tagsIndex>h1{
@@ -915,3 +986,13 @@ main{
     font-size: 1.25em;
     font-weight: 700;
 }
+
+.photoFilter{
+    display: flex;
+    justify-content: space-between;
+    margin: 2em 0;
+}
+
+
+
+/* CREATE ALBUM */

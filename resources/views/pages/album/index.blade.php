@@ -7,11 +7,11 @@
 
                 {{-- Si l'on effectue une recherche --}}
 
-                @if (isset($result))
+                @if (request()->input("search"))
                     @if (count($albums)==1)
-                        <h2>Résultat de la recherche : "{{$result}}"</h2>
+                        <h2>Résultat de la recherche : "{{request()->input("search")}}"</h2>
                     @else
-                        <h2>Résultats de la recherche : "{{$result}}"</h2>
+                        <h2>Résultats de la recherche : "{{request()->input("search")}}"</h2>
                     @endif
                 @else
                     <h2>Découvre les albums !</h2>
@@ -32,7 +32,7 @@
                         <select name="order" id="order">
                             <option value="" disabled selected hidden>Trier selon ...</option>
                             <option value="titre" {{(request()->get('order')=="titre" ? "selected" : false)}}>Titre</option>
-                            <option value="created_at" {{(request()->get('order')=="created_at" ? "selected" : false)}}>Date de création</option>
+                            <option value="creation" {{(request()->get('order')=="creation" ? "selected" : false)}}>Date de création</option>
                         </select>
                         <select name="by" id="by">
                             <option value="" disabled selected hidden>Par ordre ...</option>
@@ -70,7 +70,7 @@
                                                 @csrf
                                                 @method("delete")
                                                 <a href="#" onclick="document.getElementById('alb_delete_welcome{{$albums[$i]->id}}').click()" class="button delete"><span><i class='bx bxs-trash' ></i>Supprimer l'album</span></a>
-                                                <input type="submit" value="Supprimer l'album" id="alb_delete_welcome{{$albums[$i]->id}}">
+                                                <input type="submit" value="Supprimer l'album" id="alb_delete_welcome{{$albums[$i]->id}}" class="alb_delete_welcome">
                                             </form>
                                         @endif
                                     </div>
@@ -78,16 +78,18 @@
                             </div>
                         @endfor 
                     @else
-                            @if (isset($result))
+                        <div class="empty-zone">
+                            @if (request()->input("search"))
                                 <p class="empty">Aucun album correspondant à la recherche</p>
                                 <img class="empty" src="/images/vectors/empty.svg" alt="empty">
                             @else
                                 <p class="empty">Oups, il semblerait qu'aucun album n'ait était créé. Sois le premier à en créer un !</p>
                                 <img class="empty" src="/images/vectors/empty.svg" alt="empty">
                             @endif
+                        </div>
                     @endif
 
-                    {{-- Si l'on est connecté : Bouton de création d'album --}}
+                {{-- Si l'on est connecté : Bouton de création d'album --}}
 
                     @auth
                         <div>
