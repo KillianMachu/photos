@@ -58,13 +58,14 @@
                                 </div>
                                 <div class="desc_alb_welcome">
                                     <h3>{{$albums[$i]->titre}}</h3>
-                                    @if ($users[$i])
-                                        <h4>Créé par <i>{{$users[$i]}}</i>, le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
+                                    @if (isset($albums[$i]->user->name))
+                                        <h4>Créé par <i>{{$albums[$i]->user->name}}</i>, le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
                                     @else
                                         <h4>Créé le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
                                     @endif
                                     <div class="buttons">
                                         <a href="{{route("albumShow", $albums[$i]->id)}}" class="button visit"><span>Parcourir l'album</span></a>
+                                        {{-- Si l'on est connecté : bouton de suppression de l'album --}}
                                         @if (isset(Auth::user()->id) && Auth::user()->id == $albums[$i]->user_id)
                                             <form action="{{route("albumDestroy", $albums[$i]->id)}}" method="post">
                                                 @csrf
@@ -78,6 +79,7 @@
                             </div>
                         @endfor 
                     @else
+                    {{-- Si il n'y a aucun album ou la recherche est nulle' --}}
                         <div class="empty-zone">
                             @if (request()->input("search"))
                                 <p class="empty">Aucun album correspondant à la recherche</p>

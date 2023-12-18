@@ -26,15 +26,11 @@ class AlbumController extends Controller
         }
         
         $photos = [];
-
-        $users = [];
-
         foreach ($albums as $album){
             $photos[] = Photo::whereRaw('LOWER(album_id) = ?', $album->id)->inRandomOrder()->first();
-            $album->user_id ? $users[] = $album->user->name : $users[] = null;
         }
 
-        return view('pages.album.index', compact("albums", "photos", "users"));
+        return view('pages.album.index', compact("albums", "photos"));
     }
 
     /**
@@ -54,7 +50,6 @@ class AlbumController extends Controller
             "titre" => "required",
             "titre-photo.*" => "required",
             "image.*" => "required | file | mimes:jpg,png",
-            // "url.*" => "required | url",
             "note.*" => "required | integer | max:5",
             "tags.*" => "required",
         ]);
@@ -69,16 +64,14 @@ class AlbumController extends Controller
             for($i=0;$i<count($request->input("titre-photo"));$i++) {
                 $tags = explode(' ', $request->input('tags')[$i]);
 
-                if($request->file("image")[$i]->isValid()) {               // Je vérifie qu'il est valide
-                    $f = $request->file("image")[$i]->hashName();         // Je récupère un hash de son nom
-                    $request->file("image")[$i]->storeAs("public/upload", $f);   // Je le stocke au bon endroit
-                    $image = "/storage/upload/$f";                     // Si je veux pouvoir l'utiliser c'est avec ce chmin
-                    // Enregistrer dans base de données ?
+                if($request->file("image")[$i]->isValid()) {
+                    $f = $request->file("image")[$i]->hashName();
+                    $request->file("image")[$i]->storeAs("public/upload", $f);
+                    $image = "/storage/upload/$f";
                 }
 
                 $photo = new Photo();
                 $photo->titre = $request->input("titre-photo")[$i];
-                // $photo->url = $request->input("url")[$i];
                 $photo->url = $image;
                 $photo->note = $request->input("note")[$i];
                 $photo->album_id = $album->id;
@@ -157,19 +150,16 @@ class AlbumController extends Controller
 
         $photos = [];
 
-        $users = [];
-
         foreach ($albums as $album){
             $photos[] = Photo::whereRaw('LOWER(album_id) = ?', $album->id)->inRandomOrder()->first();
-            $album->user_id ? $users[] = $album->user->name : $users[] = null;
         }
 
-        return view('pages.album.index', compact("albums", "photos", "users"));
+        return view('pages.album.index', compact("albums", "photos"));
     }
 
     public function filterPhotos(Request $request, $id){
-        $order = $request->input("order")?? "titre";
-        $by = $request->input("by") ?? "asc";
+        $order = $request->input("order") == "titre" || $request->input("order") == "note" ? $request->input("order") : "titre";
+        $by = $request->input("order") == "asc" || $request->input("by") == "desc" ? $request->input("by") : "asc";
 
         $tag = $request->input('tag');
         $titre = $request->input('titre');

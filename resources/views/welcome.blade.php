@@ -29,21 +29,13 @@
                                 </div>
                                 <div class="desc_alb_welcome">
                                     <h3>{{$albums[$i]->titre}}</h3>
-                                    @if ($users[$i])
-                                        <h4>Créé par <i>{{$users[$i]}}</i>, le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
+                                    @if (isset($albums[$i]->user->name))
+                                        <h4>Créé par <i>{{$albums[$i]->user->name}}</i>, le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
                                     @else
                                         <h4>Créé le <i>{{date('j F Y', strtotime($albums[$i]->creation))}}</i></h4>
                                     @endif
                                     <div>
                                         <a href="{{route("albumShow", $albums[$i]->id)}}" class="button visit"><span>Parcourir l'album</span></a>
-                                        @if (isset(Auth::user()->id) && Auth::user()->id == $albums[$i]->user_id)
-                                            <form action="{{route("albumDestroy", $albums[$i]->id)}}" method="post">
-                                                @csrf
-                                                @method("delete")
-                                                <a href="#" onclick="document.getElementById('alb_delete_welcome{{$albums[$i]->id}}').click()" class="button delete"><span><i class='bx bxs-trash' ></i>Supprimer l'album</span></a>
-                                                <input type="submit" value="Supprimer l'album" id="alb_delete_welcome{{$albums[$i]->id}}" class="alb_delete_welcome">
-                                            </form>
-                                        @endif
                                     </div>
                                 </div>
                             </div>

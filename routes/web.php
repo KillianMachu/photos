@@ -37,14 +37,3 @@ Route::resource('/album', AlbumController::class, ['names'=>["show"=>"albumShow"
 
 
 Route::resource('/tag', TagController::class, ['names'=>["index"=>"tagIndex", "show"=>"tagShow"]])->only(["index", "show"]);
-
-// Route::get('/album', [AlbumController::class, 'showAlbums'])->name('albums');
-
-// Route::get('/album/{id}', [AlbumController::class, 'showAlbum'])->name('album')->where('id', '(?!nouveau$).*$');
-
-// Route::get('/album/nouveau', [AlbumController::class, 'newAlbum'])->name('newAlbum');
-// Route::post('/album/nouveau', [AlbumController::class, 'storeAlbum']);
-
-// Route::get('/tag', [AlbumController2::class, 'showTags'])->name('tags');
-
-// Route::get('/tag/{id}', [AlbumController2::class, 'showTag'])->name('tag');

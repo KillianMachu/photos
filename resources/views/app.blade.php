@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    {{-- <link rel="stylesheet" href="https://use.typekit.net/kjw8qrv.css"> --}}
     <link rel="icon" type="image/svg+xml" href="{{asset('images/vectors/NP.svg')}}" />
     <title>Album Photo</title>
 </head>
@@ -26,7 +25,6 @@
             <a href="{{route("home")}}" class="home">NaPicture</a>
             <div class="right">
                 @auth
-                    {{-- <h3>Bonjour {{Auth::user()->name}}</h3> --}}
                     <a href="{{route("logout")}}"
                     onclick="document.getElementById('logout').submit(); return false;" class="log"><i class='bx bx-log-out' ></i>Se déconnecter</a>
                     <form id="logout" action="{{route("logout")}}" method="post">

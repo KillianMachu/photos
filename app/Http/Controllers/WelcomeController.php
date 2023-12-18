@@ -13,13 +13,10 @@ class WelcomeController extends Controller
 
         $photos = [];
 
-        $users = [];
-
         foreach ($albums as $album) {
             $photos[] = Photo::whereRaw('LOWER(album_id) = ?', $album->id)->inRandomOrder()->first();
-            $album->user_id ? $users[] = $album->user->name : $users[] = null;
         }
 
-        return view('welcome', compact("albums", "photos", "users"));
+        return view('welcome', compact("albums", "photos"));
     }
 }

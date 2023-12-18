@@ -32,7 +32,6 @@ class PhotoController extends Controller
     {
         $request->validate([
             "titre-photo.*" => "required",
-            // "url.*" => "required | url",
             "image.*" => "required | file | mimes:jpg,png",
             "note.*" => "required | integer | max:5",
             "tags.*" => "required",
@@ -49,7 +48,6 @@ class PhotoController extends Controller
 
             $photo = new Photo();
             $photo->titre = $request->input("titre-photo")[$i];
-            // $photo->url = $request->input("url")[$i];
             $photo->url = $image;
             $photo->note = $request->input("note")[$i];
             $photo->album_id = $request->input("album_id");

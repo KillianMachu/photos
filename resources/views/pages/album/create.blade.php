@@ -2,20 +2,19 @@
 
 @section('content')
 
-<h1 class="titre">Créer un nouvel album</h1>
-<div class="center">
-<form action="{{route('albumStore')}}" method="post" id="add" enctype="multipart/form-data" class="form-create">
-    @csrf
-    <div class="create-container">
-        <div class="input-fields">
-            <label for="titre"></label>
-            <input type="text" name="titre" id="titre" placeholder="Titre de votre album" required class="menue">
+<div class="container albumCreate">
+    <h2>Créer un nouvel album</h2>
+    <form action="{{route('albumStore')}}" method="post" id="add" enctype="multipart/form-data">
+        @csrf
+        <div class="create-container">
+            <div class="input-fields">
+                <input type="text" name="titre" id="titre" placeholder="Titre de votre album" required>
+            </div>
+            <button id="add-photo">Ajouter une photo</button>
+            @include("partials.errors")
+            <input type="submit" value="Suivant">
         </div>
-        <button id="add-photo" class="menue">Ajouter une photo</button >
-        @include("partials.errors")
-        <input type="submit" value="Suivant" class="submite">
-    </div>
-</form>
+    </form>
 </div>
 
 @endsection
